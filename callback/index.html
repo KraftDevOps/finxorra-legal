@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<title>Weiterleitung – FinXorra</title>
+<style>body{font:16px/1.6 system-ui,sans-serif;max-width:640px;margin:48px auto;padding:0 16px}</style>
+</head>
+<body>
+<h1>Weiterleitung zu FinXorra …</h1>
+<p>Sie werden zu Ihrer lokalen FinXorra-Installation (<code>http://localhost:5173</code>) weitergeleitet. Diese Seite speichert nichts; sie reicht nur die Antwort der Bank an Ihren eigenen Rechner weiter.</p>
+<p id="manual" hidden>Falls nichts passiert: <a id="link" href="http://localhost:5173/bank/callback">weiter zu FinXorra</a></p>
+<script>
+  // Festes Ziel (kein Parameter): Rücksprung der Bank -> lokale FinXorra-Seite /bank/callback, state/code/error bleiben erhalten.
+  var target = "http://localhost:5173/bank/callback" + window.location.search;
+  document.getElementById("link").href = target;
+  document.getElementById("manual").hidden = false;
+  window.location.replace(target);
+</script>
+<noscript><p><a href="http://localhost:5173/bank/callback">Weiter zu FinXorra</a> (die Parameter der Bank müssen dabei an die Adresse angehängt werden; bitte JavaScript aktivieren).</p></noscript>
+</body>
+</html>
