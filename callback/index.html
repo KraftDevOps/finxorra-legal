@@ -6,19 +6,68 @@
 <meta name="robots" content="noindex">
 <meta name="referrer" content="no-referrer">
 <title>Weiterleitung – FinXorra</title>
-<style>body{font:16px/1.6 system-ui,sans-serif;max-width:640px;margin:48px auto;padding:0 16px}</style>
+<style>
+:root{--bg:#fff;--fg:#1a1a1a;--muted:#555;--link:#1a56db;--rule:#ddd}
+@media (prefers-color-scheme:dark){:root{--bg:#14161a;--fg:#e8e8e8;--muted:#a0a0a0;--link:#7aa8ff;--rule:#333}}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,sans-serif;max-width:640px;margin:48px auto;padding:0 16px}
+.btn{display:block;margin:8px 0;padding:12px 16px;border:1px solid var(--rule);border-radius:8px;color:var(--link);text-decoration:none}
+.muted{color:var(--muted);font-size:.9rem}
+</style>
 </head>
 <body>
-<h1>Weiterleitung zu FinXorra …</h1>
-<p>Sie werden zu Ihrer lokalen FinXorra-Installation (<code>http://localhost:5173</code>) weitergeleitet. Diese Seite speichert nichts; sie reicht nur die Antwort der Bank an Ihren eigenen Rechner weiter.</p>
-<p id="manual" hidden>Falls nichts passiert: <a id="link" href="http://localhost:5173/bank/callback">weiter zu FinXorra</a></p>
+<h1>Weiterleitung zu FinXorra</h1>
+<p>Die Bank hat Sie hierher zurückgeschickt. Diese Seite speichert nichts von der Antwort der Bank; sie reicht sie nur an <strong>Ihre eigene FinXorra-Installation</strong> weiter. Wählen Sie, wo Ihre FinXorra läuft:</p>
+<div id="choices"></div>
+<p id="auto" class="muted" hidden></p>
+<noscript><p>Bitte JavaScript aktivieren, damit die Weiterleitung mit den Angaben der Bank erfolgen kann.</p></noscript>
 <script>
-  // Festes Ziel (kein Parameter): Rücksprung der Bank -> lokale FinXorra-Seite /bank/callback, state/code/error bleiben erhalten.
-  var target = "http://localhost:5173/bank/callback" + window.location.search;
-  document.getElementById("link").href = target;
-  document.getElementById("manual").hidden = false;
-  window.location.replace(target);
+  // Feste Liste erlaubter Ziele (kein Parameter, kein offener Redirect). state/code/error der Bank bleiben erhalten.
+  var TARGETS = [
+    { id: "local", label: "Dieser Rechner (localhost:5173)", url: "http://localhost:5173/bank/callback" },
+    { id: "nas", label: "NAS (192.168.0.101:5173)", url: "http://192.168.0.101:5173/bank/callback" }
+  ];
+  var KEY = "finxorra_callback_target";
+  var search = window.location.search;
+
+  function remembered() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function remember(id) { try { localStorage.setItem(KEY, id); } catch (e) { /* ohne Speicher: jedes Mal fragen */ } }
+  function find(id) { for (var i = 0; i < TARGETS.length; i++) { if (TARGETS[i].id === id) return TARGETS[i]; } return null; }
+
+  function showChoices() {
+    var box = document.getElementById("choices");
+    box.innerHTML = "";
+    TARGETS.forEach(function (t) {
+      var a = document.createElement("a");
+      a.className = "btn";
+      a.href = t.url + search;
+      a.textContent = t.label;
+      a.addEventListener("click", function () { remember(t.id); });
+      box.appendChild(a);
+    });
+    var hint = document.createElement("p");
+    hint.className = "muted";
+    hint.textContent = "Ihre Wahl wird in diesem Browser gemerkt; beim nächsten Mal geht es automatisch dorthin.";
+    box.appendChild(hint);
+  }
+
+  var known = find(remembered());
+  if (!search) {
+    document.getElementById("choices").textContent = "Diese Seite wird von Ihrer Bank nach der Freigabe aufgerufen und enthält hier keine Angaben.";
+  } else if (known) {
+    var auto = document.getElementById("auto");
+    auto.hidden = false;
+    auto.innerHTML = "Weiterleitung zu <strong></strong> … <a href=\"#\" id=\"change\">Ziel ändern</a>";
+    auto.querySelector("strong").textContent = known.label;
+    var timer = setTimeout(function () { window.location.replace(known.url + search); }, 1200);
+    document.getElementById("change").addEventListener("click", function (e) {
+      e.preventDefault();
+      clearTimeout(timer);
+      auto.hidden = true;
+      showChoices();
+    });
+  } else {
+    showChoices();
+  }
 </script>
-<noscript><p><a href="http://localhost:5173/bank/callback">Weiter zu FinXorra</a> (die Parameter der Bank müssen dabei an die Adresse angehängt werden; bitte JavaScript aktivieren).</p></noscript>
 </body>
 </html>
