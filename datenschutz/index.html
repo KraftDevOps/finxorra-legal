@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Datenschutzerklärung – FinXorra</title>
-<meta name="description" content="Datenschutzerklärung von FinXorra (private Haushaltsbuchhaltung)">
+<meta name="description" content="Datenschutzerklärung von FinXorra (private Vermögens- und Haushaltsverwaltung)">
 <style>
 :root{--bg:#fff;--fg:#1a1a1a;--muted:#555;--link:#1a56db;--rule:#ddd}
 @media (prefers-color-scheme:dark){:root{--bg:#14161a;--fg:#e8e8e8;--muted:#a0a0a0;--link:#7aa8ff;--rule:#333}}
@@ -20,45 +20,84 @@ nav a{margin-right:16px}
 <main>
 <nav class="muted"><a href="../">FinXorra</a><a href="../nutzungsbedingungen/">Nutzungsbedingungen</a></nav>
 <h1>Datenschutzerklärung – FinXorra</h1>
-<p class="muted">Stand: 21.09.2026 · <a href="#en">English version below</a></p>
+<p class="muted">Stand: 03.10.2026 (FinXorra v0.7.0) · <a href="#en">English version below</a></p>
 
 <h2>1. Worum es geht</h2>
-<p>FinXorra ist eine selbst gehostete Anwendung für die private Haushaltsbuchhaltung. Sie wird von einer einzelnen Privatperson für die eigene Nutzung betrieben und ist nicht öffentlich zugänglich. Es gibt keine weiteren Nutzer, die sich registrieren können.</p>
+<p>FinXorra ist eine selbst gehostete Anwendung für die private Vermögens- und Haushaltsverwaltung (Bankkonten, Buchungen, Fixkosten, Haushaltsbuch, Immobilien, Kredite, Verträge, Bestellungen, E-Mail-Auswertung, Dokumente). Sie wird von einer Privatperson auf eigener Hardware betrieben und ist nicht öffentlich zugänglich. Die Anwendung ist technisch mehrbenutzerfähig (Rollen, Freigaben); Zugang haben ausschließlich Personen, für die der Betreiber ein Benutzerkonto eingerichtet hat.</p>
 
 <h2>2. Verantwortlicher</h2>
 <p>Patrick Kraft, Kontakt: <a href="mailto:Kraft.DevOps@web.de">Kraft.DevOps@web.de</a></p>
 
 <h2>3. Welche Daten verarbeitet werden</h2>
-<p>Über den Kontoinformationsdienst von Enable Banking (Open Banking / PSD2) ruft FinXorra <strong>ausschließlich lesend</strong> Kontodaten der eigenen Konten des Betreibers ab: Kontostammdaten (z. B. IBAN, Kontoname), Salden und Umsätze. Es werden <strong>keine Zahlungen ausgelöst</strong>. Die Anmeldung bei der Bank und die Freigabe erfolgen ausschließlich bei der Bank selbst; FinXorra erhält keine Zugangsdaten der Bank (Kennung, Passwort, PIN, TAN), sondern nur eine zeitlich befristete Sitzung.</p>
+<ul>
+<li><strong>Bankdaten über Enable Banking (Open Banking / PSD2):</strong> FinXorra ruft <strong>ausschließlich lesend</strong> Kontostammdaten (z. B. IBAN, Kontoname), Salden und Umsätze ab; es werden <strong>keine Zahlungen ausgelöst</strong>. Anmeldung und Freigabe erfolgen ausschließlich bei der Bank; FinXorra erhält keine Zugangsdaten der Bank, sondern nur eine zeitlich befristete Sitzung.</li>
+<li><strong>Bankdaten über FinTS (Geldstrom, fints-rs):</strong> Für den direkten Abruf bei der Bank gibt der Betreiber Bankleitzahl, Login und PIN in FinXorra ein. Diese Zugangsdaten werden <strong>verschlüsselt</strong> gespeichert und nur für den Abruf bei der jeweiligen Bank verwendet. Abgerufen werden Konten, Salden, Umsätze und Depotbestände (nur lesend).</li>
+<li><strong>Trade Republic:</strong> Über den lokal mitlaufenden Dienst „trade-republic-uapi“ liest FinXorra Konto, Umsätze und Depotpositionen (nur lesend, keine Orders). Der API-Key zum Dienst wird verschlüsselt gespeichert; eine Anmeldung bei Trade Republic erfolgt ausschließlich im Dienst per QR-Code in der Trade-Republic-App. Die Schnittstelle ist inoffiziell.</li>
+<li><strong>Dateiimport:</strong> Buchungen aus CSV-Dateien, die der Betreiber selbst hochlädt.</li>
+<li><strong>E-Mail-Postfächer:</strong> Optional verbindet der Betreiber ein Postfach (Weiterleitungsadresse oder IMAP, z. B. WEB.DE). Das IMAP-Passwort wird verschlüsselt gespeichert. Eingehende Mails (Absender, Betreff, Inhalt, Empfangszeitpunkt) werden gespeichert, klassifiziert und – soweit sie Bestellungen oder Verträge betreffen – ausgewertet und mit Bestellungen/Verträgen verknüpft. Ignorierte Mails werden standardmäßig nach 28 Tagen, Newsletter nach 90 Tagen automatisch gelöscht (einstellbar).</li>
+<li><strong>Fachdaten:</strong> Haushaltsbuch, Fixkosten, Kredite, Verträge und Anbieter, Bestellungen, Immobilien einschließlich Einheiten und Mietverhältnissen (Mieterangaben wie Anrede, Name, optional Geburtsdatum und Firma), Fahrtenbuch (Adressen, Fahrzeuge, Fahrten) sowie hochgeladene Bilder und Dokumente.</li>
+<li><strong>Benutzerkonten:</strong> E-Mail-Adresse, Name, Passwort (nur als bcrypt-Hash), optional Zwei-Faktor-Authentifizierung, Zeitzone, Profilbild, Rolle. Rollenänderungen, Freigaben und abgelehnte Zugriffe werden in einem Audit-Log protokolliert.</li>
+</ul>
 
 <h2>4. Zweck</h2>
-<p>Die Daten werden ausschließlich zur privaten Haushaltsführung des Betreibers verarbeitet (Auswertung der eigenen Einnahmen und Ausgaben). Es handelt sich um eine Verarbeitung durch eine natürliche Person zur Ausübung ausschließlich persönlicher Tätigkeiten.</p>
+<p>Die Daten werden ausschließlich zur privaten Vermögens- und Haushaltsführung des Betreibers verarbeitet (Auswertung der eigenen Einnahmen, Ausgaben, Verträge und Immobilien). Es handelt sich um eine Verarbeitung durch eine natürliche Person zur Ausübung ausschließlich persönlicher oder familiärer Tätigkeiten.</p>
 
-<h2>5. Speicherung und Sicherheit</h2>
-<p>Die Daten werden auf einem eigenen Server des Betreibers gespeichert. Sitzungsdaten des Anbieters werden verschlüsselt abgelegt. Es findet <strong>keine Weitergabe an Dritte</strong>, keine Werbung und kein Tracking statt. Neben Enable Banking (als Vermittler) und der jeweiligen Bank sind keine weiteren Empfänger beteiligt; für die Datenverarbeitung durch Enable Banking gilt deren eigene Datenschutzerklärung.</p>
+<h2>5. Speicherung, Sicherheit und Empfänger</h2>
+<p>Die Daten werden auf einem eigenen Server des Betreibers gespeichert (Datenbank, Dokumentenablage über paperless-ngx im eigenen Netzwerk). Zugangsdaten zu Banken, Postfächern und Diensten sowie Sitzungsdaten der Anbieter werden verschlüsselt abgelegt. Es findet <strong>keine Weitergabe zu Werbezwecken</strong>, keine Werbung und <strong>kein Tracking</strong> statt; die Anwendung bindet keine Analyse- oder Werbedienste ein. Der Browser speichert lokal nur technisch notwendige Einstellungen (Anmeldung, Sprache, Darstellung, Spaltenauswahl).</p>
+<p>Daten werden nur an die folgenden Stellen übermittelt, und zwar nur, wenn die jeweilige Funktion eingerichtet bzw. ausgelöst wurde:</p>
+<ul>
+<li><strong>Enable Banking</strong> (als Vermittler) und die jeweilige <strong>Bank</strong> bzw. <strong>Trade Republic</strong> – für die Kontoabfrage; hierfür gelten deren eigene Datenschutzerklärungen.</li>
+<li><strong>Sprachmodell (LLM) für die Mail-Auswertung:</strong> In der mitgelieferten Konfiguration kommt ein lokales Modell (Ollama) im eigenen Netzwerk zum Einsatz; dann verlassen die Daten das eigene Netz nicht. Ist stattdessen ein Cloud-Anbieter (z. B. Anthropic oder ein OpenAI-kompatibler Dienst) konfiguriert, wird der <strong>Mailtext (Betreff und Inhalt)</strong> an diesen Anbieter übermittelt. Für den Report-Builder gehen nur die Frage und das Feldschema an das Modell, keine Datensätze.</li>
+<li><strong>logo.dev:</strong> Beim Laden eines Firmenlogos für Anbieter/Geschäfte wird der eingegebene Firmenname bzw. die Domain an logo.dev übermittelt.</li>
+<li><strong>OpenStreetMap (Nominatim) und OSRM:</strong> Bei der Entfernungsermittlung im Fahrtenbuch werden die beiden Adressen an diese Dienste übermittelt.</li>
+<li><strong>E-Mail-/WhatsApp-Benachrichtigungen (optional):</strong> Versand über den konfigurierten SMTP-Server bzw. über Twilio.</li>
+<li><strong>GitHub:</strong> Die Changelog-Seite liest die öffentliche Commit-Historie des Projekts über die GitHub-API; es werden keine Nutzerdaten übertragen.</li>
+</ul>
 
-<h2>6. Widerruf und Löschung</h2>
-<p>Die Einwilligung zum Kontozugriff kann jederzeit widerrufen werden – in FinXorra über „Trennen“ (dabei werden Sitzung, Rohdaten und Zugangsdaten gelöscht) oder direkt bei der Bank. Der Zugriff endet spätestens mit Ablauf der von der Bank gewährten Einwilligungsdauer.</p>
+<h2>6. Rücksprung-Seite (GitHub Pages)</h2>
+<p>Nach der Freigabe bei der Bank leitet die Bank auf die Seite <code>/callback/</code> dieses Angebots zurück. Die Seite speichert nichts von der Antwort der Bank und reicht sie nur an die eigene FinXorra-Installation des Betreibers weiter; lediglich die Wahl des Weiterleitungsziels wird im Browser (localStorage) gemerkt. Die Seiten werden über GitHub Pages ausgeliefert; dabei verarbeitet der Hosting-Anbieter (GitHub) technisch bedingt Verbindungsdaten (z. B. IP-Adresse) gemäß seiner eigenen Datenschutzerklärung.</p>
 
-<h2>7. Kontakt</h2>
-<p>Da FinXorra nur vom Betreiber selbst genutzt wird, werden keine Daten Dritter verarbeitet. Für Fragen zum Datenschutz genügt eine E-Mail an <a href="mailto:Kraft.DevOps@web.de">Kraft.DevOps@web.de</a>.</p>
+<h2>7. Widerruf und Löschung</h2>
+<p>Die Einwilligung zum Kontozugriff kann jederzeit widerrufen werden – in FinXorra über „Trennen“ (dabei werden Sitzung, Rohdaten und Zugangsdaten gelöscht) oder direkt bei der Bank. Der Zugriff endet spätestens mit Ablauf der von der Bank gewährten Einwilligungsdauer. Ein getrenntes Postfach verliert seine gespeicherten Zugangsdaten; E-Mails, Buchungen und andere Fachdaten lassen sich in FinXorra löschen, ein Benutzerkonto kann der Administrator deaktivieren.</p>
+
+<h2>8. Kontakt</h2>
+<p>Für Fragen zum Datenschutz genügt eine E-Mail an <a href="mailto:Kraft.DevOps@web.de">Kraft.DevOps@web.de</a>.</p>
 
 <hr>
 <h1 id="en">Privacy Policy – FinXorra</h1>
-<p class="muted">Last updated: 21 September 2026</p>
+<p class="muted">Last updated: 3 October 2026 (FinXorra v0.7.0)</p>
 <h2>1. Scope</h2>
-<p>FinXorra is a self-hosted personal household bookkeeping application, operated by a single private individual for their own use. It is not publicly accessible and has no other users.</p>
+<p>FinXorra is a self-hosted personal wealth and household management application (bank accounts, transactions, fixed costs, household book, properties, loans, contracts, orders, e-mail analysis, documents). It is operated by a private individual on their own hardware and is not publicly accessible. It is technically multi-user capable (roles, shares); access is limited to people for whom the operator has set up a user account.</p>
 <h2>2. Controller</h2>
 <p>Patrick Kraft, contact: <a href="mailto:Kraft.DevOps@web.de">Kraft.DevOps@web.de</a></p>
 <h2>3. Data processed</h2>
-<p>Through the account information service of Enable Banking (Open Banking / PSD2), FinXorra retrieves <strong>read-only</strong> data of the operator's own bank accounts: account details (e.g. IBAN, account name), balances and transactions. <strong>No payments are initiated.</strong> Authentication and consent take place exclusively at the bank; FinXorra never receives the bank credentials (user ID, password, PIN, TAN), only a time-limited session.</p>
+<ul>
+<li><strong>Bank data via Enable Banking (Open Banking / PSD2):</strong> FinXorra retrieves <strong>read-only</strong> account details (e.g. IBAN, account name), balances and transactions; <strong>no payments are initiated</strong>. Authentication and consent take place exclusively at the bank; FinXorra receives no bank credentials, only a time-limited session.</li>
+<li><strong>Bank data via FinTS (Geldstrom, fints-rs):</strong> For direct access, the operator enters bank code, login and PIN in FinXorra. These credentials are stored <strong>encrypted</strong> and used only for the retrieval at the respective bank. Accounts, balances, transactions and securities holdings are read (read-only).</li>
+<li><strong>Trade Republic:</strong> Through the locally running service "trade-republic-uapi", FinXorra reads account, transactions and portfolio positions (read-only, no orders). The service API key is stored encrypted; login to Trade Republic happens exclusively in that service via QR code in the Trade Republic app. The interface is unofficial.</li>
+<li><strong>File import:</strong> transactions from CSV files uploaded by the operator.</li>
+<li><strong>E-mail mailboxes:</strong> Optionally the operator connects a mailbox (forwarding address or IMAP, e.g. WEB.DE). The IMAP password is stored encrypted. Incoming mails (sender, subject, content, received time) are stored, classified and – where they concern orders or contracts – analysed and linked to orders/contracts. Ignored mails are deleted automatically after 28 days by default, newsletters after 90 days (configurable).</li>
+<li><strong>Application data:</strong> household book, fixed costs, loans, contracts and providers, orders, properties including units and tenancies (tenant details such as salutation, name, optionally date of birth and company), trip log (addresses, vehicles, trips) and uploaded images and documents.</li>
+<li><strong>User accounts:</strong> e-mail address, name, password (bcrypt hash only), optional two-factor authentication, time zone, profile picture, role. Role changes, shares and denied accesses are recorded in an audit log.</li>
+</ul>
 <h2>4. Purpose</h2>
-<p>The data is used solely for the operator's private household finances (analysis of own income and expenses).</p>
-<h2>5. Storage and security</h2>
-<p>Data is stored on the operator's own server; provider session data is stored encrypted. There is <strong>no disclosure to third parties</strong>, no advertising and no tracking. Apart from Enable Banking (as intermediary) and the respective bank, no further recipients are involved; Enable Banking's processing is governed by its own privacy policy.</p>
-<h2>6. Withdrawal and deletion</h2>
-<p>Consent to account access can be withdrawn at any time, either in FinXorra via "Disconnect" (which deletes the session, raw data and credentials) or directly at the bank. Access ends at the latest when the consent period granted by the bank expires.</p>
-<h2>7. Contact</h2>
+<p>The data is used solely for the operator's private wealth and household management (analysis of own income, expenses, contracts and properties). It is processed by a natural person in the course of purely personal or household activities.</p>
+<h2>5. Storage, security and recipients</h2>
+<p>Data is stored on the operator's own server (database, document storage via paperless-ngx in the own network). Credentials for banks, mailboxes and services as well as provider session data are stored encrypted. There is <strong>no disclosure for advertising purposes</strong>, no advertising and <strong>no tracking</strong>; the application includes no analytics or advertising services. The browser stores only technically necessary settings locally (login, language, theme, column selection).</p>
+<p>Data is transmitted only to the following recipients, and only if the respective feature has been set up or triggered:</p>
+<ul>
+<li><strong>Enable Banking</strong> (as intermediary) and the respective <strong>bank</strong> or <strong>Trade Republic</strong> – for account retrieval; their own privacy policies apply.</li>
+<li><strong>Language model (LLM) for mail analysis:</strong> the bundled configuration uses a local model (Ollama) in the own network, so data does not leave it. If a cloud provider (e.g. Anthropic or an OpenAI-compatible service) is configured instead, the <strong>mail text (subject and content)</strong> is sent to that provider. For the report builder only the question and the field schema are sent to the model, no records.</li>
+<li><strong>logo.dev:</strong> when loading a company logo for providers/stores, the entered company name or domain is sent to logo.dev.</li>
+<li><strong>OpenStreetMap (Nominatim) and OSRM:</strong> when determining distances in the trip log, the two addresses are sent to these services.</li>
+<li><strong>E-mail/WhatsApp notifications (optional):</strong> sent via the configured SMTP server or Twilio.</li>
+<li><strong>GitHub:</strong> the changelog page reads the project's public commit history via the GitHub API; no user data is transmitted.</li>
+</ul>
+<h2>6. Redirect page (GitHub Pages)</h2>
+<p>After approval at the bank, the bank redirects to the page <code>/callback/</code> of this site. The page stores nothing from the bank's response and merely forwards it to the operator's own FinXorra installation; only the chosen forwarding target is remembered in the browser (localStorage). The pages are served via GitHub Pages; the hosting provider (GitHub) technically processes connection data (e.g. IP address) in accordance with its own privacy policy.</p>
+<h2>7. Withdrawal and deletion</h2>
+<p>Consent to account access can be withdrawn at any time, either in FinXorra via "Disconnect" (which deletes the session, raw data and credentials) or directly at the bank. Access ends at the latest when the consent period granted by the bank expires. A disconnected mailbox loses its stored credentials; mails, transactions and other application data can be deleted in FinXorra, and an administrator can deactivate a user account.</p>
+<h2>8. Contact</h2>
 <p>Questions about data protection: <a href="mailto:Kraft.DevOps@web.de">Kraft.DevOps@web.de</a></p>
 </main>
 </body>
