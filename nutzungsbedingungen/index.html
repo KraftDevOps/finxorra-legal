@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Nutzungsbedingungen – FinXorra</title>
-<meta name="description" content="Nutzungsbedingungen von FinXorra (private Haushaltsbuchhaltung)">
+<meta name="description" content="Nutzungsbedingungen von FinXorra (private Vermögens- und Haushaltsverwaltung)">
 <style>
 :root{--bg:#fff;--fg:#1a1a1a;--muted:#555;--link:#1a56db;--rule:#ddd}
 @media (prefers-color-scheme:dark){:root{--bg:#14161a;--fg:#e8e8e8;--muted:#a0a0a0;--link:#7aa8ff;--rule:#333}}
@@ -20,19 +20,19 @@ nav a{margin-right:16px}
 <main>
 <nav class="muted"><a href="../">FinXorra</a><a href="../datenschutz/">Datenschutz</a></nav>
 <h1>Nutzungsbedingungen – FinXorra</h1>
-<p class="muted">Stand: 21.09.2026 · <a href="#en">English version below</a></p>
+<p class="muted">Stand: 03.10.2026 (FinXorra v0.7.0) · <a href="#en">English version below</a></p>
 
 <h2>1. Anbieter und Geltungsbereich</h2>
-<p>FinXorra ist eine selbst gehostete Anwendung für die private Haushaltsbuchhaltung von Patrick Kraft (Kontakt: <a href="mailto:Kraft.DevOps@web.de">Kraft.DevOps@web.de</a>). Sie wird nicht öffentlich angeboten und ausschließlich vom Betreiber für die eigenen Konten genutzt. Ein Zugang für Dritte besteht nicht.</p>
+<p>FinXorra ist eine selbst gehostete Anwendung für die private Vermögens- und Haushaltsverwaltung von Patrick Kraft (Kontakt: <a href="mailto:Kraft.DevOps@web.de">Kraft.DevOps@web.de</a>). Sie wird nicht öffentlich angeboten und vom Betreiber für die eigenen Konten und Unterlagen genutzt. Ein Benutzerzugang besteht nur für Personen, für die der Betreiber ein Konto eingerichtet hat; eine Registrierung durch Dritte ist nicht vorgesehen.</p>
 
 <h2>2. Leistungsumfang</h2>
-<p>Die Anwendung ruft mit ausdrücklicher Einwilligung des Betreibers über Enable Banking lesend Kontoinformationen (Konten, Salden, Umsätze) der eigenen Bankkonten ab und wertet sie für die private Haushaltsführung aus. Zahlungen werden nicht ausgelöst.</p>
+<p>Die Anwendung ruft mit ausdrücklicher Einwilligung des Betreibers lesend Kontoinformationen (Konten, Salden, Umsätze, Depotpositionen) der eigenen Bankkonten ab – über Enable Banking (PSD2), per FinTS oder über den Dienst „trade-republic-uapi“ – und wertet sie für die private Haushaltsführung aus. Optional liest sie E-Mails eines verbundenen Postfachs ein und leitet daraus Bestellungen, Verträge und Fälligkeiten ab. Zahlungen oder Wertpapieraufträge werden nicht ausgelöst.</p>
 
 <h2>3. Einwilligung</h2>
-<p>Der Zugriff auf ein Bankkonto erfolgt nur nach Freigabe bei der Bank (starke Kundenauthentifizierung) und nur für die von der Bank gewährte Dauer. Die Einwilligung kann jederzeit in der Anwendung („Trennen“) oder bei der Bank widerrufen werden.</p>
+<p>Der Zugriff auf ein Bankkonto erfolgt nur nach Freigabe bei der Bank (starke Kundenauthentifizierung) bzw. mit den vom Betreiber eingegebenen Zugangsdaten und nur für die von der Bank gewährte Dauer. Die Einwilligung kann jederzeit in der Anwendung („Trennen“) oder bei der Bank widerrufen werden; ein verbundenes Postfach kann jederzeit getrennt werden.</p>
 
 <h2>4. Haftung</h2>
-<p>Die Anwendung wird ohne Gewähr für Vollständigkeit und Richtigkeit der Daten bereitgestellt; maßgeblich sind stets die Angaben der Bank. Sie ersetzt keine Steuer-, Rechts- oder Finanzberatung.</p>
+<p>Die Anwendung wird ohne Gewähr für Vollständigkeit und Richtigkeit der Daten bereitgestellt; maßgeblich sind stets die Angaben der Bank. Ergebnisse der automatischen Auswertung (Kategorisierung, E-Mail-Extraktion durch Regeln, Muster oder Sprachmodell, Verknüpfungen, Fälligkeiten, Reports) können fehlerhaft sein und sind vor einer Entscheidung zu prüfen. Die Schnittstelle zu Trade Republic ist inoffiziell und steht in keiner Verbindung zu Trade Republic; ihre Nutzung erfolgt auf eigene Verantwortung. Die Anwendung ersetzt keine Steuer-, Rechts- oder Finanzberatung.</p>
 
 <h2>5. Datenschutz</h2>
 <p>Siehe <a href="../datenschutz/">Datenschutzerklärung</a>.</p>
@@ -42,15 +42,15 @@ nav a{margin-right:16px}
 
 <hr>
 <h1 id="en">Terms of Use – FinXorra</h1>
-<p class="muted">Last updated: 21 September 2026</p>
+<p class="muted">Last updated: 3 October 2026 (FinXorra v0.7.0)</p>
 <h2>1. Provider and scope</h2>
-<p>FinXorra is a self-hosted personal household bookkeeping application by Patrick Kraft (contact: <a href="mailto:Kraft.DevOps@web.de">Kraft.DevOps@web.de</a>). It is not offered to the public and is used solely by the operator for their own accounts. There is no access for third parties.</p>
+<p>FinXorra is a self-hosted personal wealth and household management application by Patrick Kraft (contact: <a href="mailto:Kraft.DevOps@web.de">Kraft.DevOps@web.de</a>). It is not offered to the public and is used by the operator for their own accounts and documents. User access exists only for people for whom the operator has set up an account; registration by third parties is not intended.</p>
 <h2>2. Services</h2>
-<p>With the operator's explicit consent, the application retrieves read-only account information (accounts, balances, transactions) of the operator's own bank accounts via Enable Banking and analyses it for private household finances. No payments are initiated.</p>
+<p>With the operator's explicit consent, the application retrieves read-only account information (accounts, balances, transactions, securities positions) of the operator's own bank accounts – via Enable Banking (PSD2), via FinTS or via the "trade-republic-uapi" service – and analyses it for private household finances. Optionally it reads e-mails of a connected mailbox and derives orders, contracts and due dates from them. No payments or securities orders are initiated.</p>
 <h2>3. Consent</h2>
-<p>Access to a bank account requires approval at the bank (strong customer authentication) and lasts only for the period granted by the bank. Consent can be withdrawn at any time in the application ("Disconnect") or at the bank.</p>
+<p>Access to a bank account requires approval at the bank (strong customer authentication) or the credentials entered by the operator, and lasts only for the period granted by the bank. Consent can be withdrawn at any time in the application ("Disconnect") or at the bank; a connected mailbox can be disconnected at any time.</p>
 <h2>4. Liability</h2>
-<p>The application is provided without warranty for completeness or accuracy; the bank's records are authoritative. It does not constitute tax, legal or financial advice.</p>
+<p>The application is provided without warranty for completeness or accuracy; the bank's records are authoritative. Results of automatic analysis (categorisation, e-mail extraction by rules, patterns or a language model, links, due dates, reports) may be incorrect and must be verified before any decision. The Trade Republic interface is unofficial, not affiliated with Trade Republic, and used at one's own risk. The application does not constitute tax, legal or financial advice.</p>
 <h2>5. Privacy</h2>
 <p>See the <a href="../datenschutz/">Privacy Policy</a>.</p>
 <h2>6. Changes</h2>
